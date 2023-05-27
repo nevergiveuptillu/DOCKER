@@ -1,0 +1,13 @@
+aws rds create-db-instance \
+   --db-name 'employees' \
+   --db-instance-identifier 'qtemployeesdbinst' \
+   --allocated-storage 20 \
+   --db-instance-class "db.t2.micro" \
+   --engine "mysql" \
+   --master-username "root" \
+   --master-user-password "rootroot" \
+   --backup-retention-period 0 \
+   --no-multi-az \
+   --no-auto-minor-version-upgrade \
+   --publicly-accessible \
+   --vpc-security-group-ids "sg-08bcb448f727c9e96"

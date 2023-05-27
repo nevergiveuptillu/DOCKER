@@ -1,0 +1,12 @@
+FROM baseImage
+CMD [ "executable" ]
+LABEL key="value"
+ARG name
+RUN 
+ADD source dest
+COPY source dest
+EXPOSE 8080
+VOLUME [ "/data" ]
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "executable" ]
+HEALTHCHECK NONE
+ENV key=value

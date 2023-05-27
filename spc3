@@ -1,0 +1,7 @@
+FROM amazoncorretto:11
+LABEL author="somanath"
+LABEL organzation="work"
+LABEL projects="learning"
+COPY  spring-petclinic-2.4.2.jar /spc2/spring-petclinic-2.4.2.jar
+EXPOSE 8080 
+CMD ["java", "-jar", "/spc2/spring-petclinic-2.4.2.jar"]

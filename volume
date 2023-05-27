@@ -1,0 +1,17 @@
+FROM tomcat:8-jdk8 
+LABEL author="somanath" project="mysoul" organization="sai priya"
+ARG user=gameoflife
+ARG group=gameoflife
+ARG uid=1000
+ARG gid=1000
+VOLUME ["/usr/local/tomcat"]
+ARG DOWNLOAD_URL=https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/gameoflife.war 
+ARG HOME_DIR=/usr/local/tomcat/webapps
+RUN apt update 
+# Create user gameoflife
+RUN groupadd -g ${gid} ${group} \
+    && useradd -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+USER $ {user}
+WORKDIR ${HOME_DIR}
+ADD --chown=${user}:${group} ${DOWNLOAD_URL} ${HOME_DIR}/gameoflife.war
+EXPOSE 8080

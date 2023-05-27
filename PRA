@@ -1,0 +1,9 @@
+FROM ubuntu
+LABEL author="Boaz"
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt update 
+RUN apt install apache2 -y
+RUN apt install php libapache2-mod-php -y
+RUN echo "<?php phpinfo(); ?>" >> /var/www/html/info.php
+EXPOSE 80
+CMD ["apache2ctl", "-D", "FOREGROUND"]

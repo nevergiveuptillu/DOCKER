@@ -1,0 +1,15 @@
+FROM node:latest
+LABEL author="somanath" project="mysoul" organization="sai priya"
+ARG USERNAME=express
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+RUN apk add --no-cache shadow
+RUN groupmod -g $USER_GID $USERNAME \
+    && usermod -u $USER_UID --gid $USER_GID $USERNAME \
+    && chown -R $USER_UID:$USER_GID /home/$USERNAME
+RUN apt update && apt install git -y
+RUN git clone https://github.com/Azure-Samples/js-e2e-express-server.git
+RUN cd js-e2e-express-server/ apt install npm -y && npm install
+EXPOSE 3000
+ENV TEST="default"
+CMD ["npm","start"]
