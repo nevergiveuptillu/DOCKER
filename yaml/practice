@@ -1,5 +1,0 @@
----
-apiversion :apps/v1  
-kind : Deployemnt
-metadata : 
-spec :
