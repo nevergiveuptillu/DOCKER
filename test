@@ -1,0 +1,10 @@
+FROM tomcat:8-jdk8 
+LABEL author="somanath" project="mysoul" organization="sai priya"
+ARG DOWNLOAD_URL=https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/gameoflife.war 
+ARG HOME_DIR=/usr/local/tomcat/webapps
+RUN apt update 
+WORKDIR ${HOME_DIR}
+ADD ${DOWNLOAD_URL} ${HOME_DIR}/gameoflife.war
+EXPOSE 8080
+CMD ["catalina.sh","run"]
+
