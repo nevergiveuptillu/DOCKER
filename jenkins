@@ -1,0 +1,11 @@
+FROM amazoncorretto:8
+LABEL author="somanath" project="mysoul" organization="sai priya"
+ARG JENKINS_VERSION=latest
+RUN apt install wget
+RUN wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | apt-key add -
+RUN sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+RUN apt-get update \
+    && apt-get install -y jenkins="${JENKINS_VERSION}"
+EXPOSE 8080
+CMD ["/usr/bin/java", "-jar", "/usr/share/jenkins/jenkins.war"]
+    
