@@ -7,13 +7,10 @@ USER ${user}
 ARG HOME_DIR=/somanath
 WORKDIR ${HOME_DIR}
 RUN groupadd -g ${gid} ${group} &&\
-    useradd -d "${HOME_DIR}" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+    useradd -d ${HOME_DIR} -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 # LABEL author = "shiva" director = "somanath" camera = "thiru"
 # ARG DOWNLOAD_URL=https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip
-# ADD https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip /somanath/
-# WORKDIR /somanath
 # ADD --chown=${user}:${group} ${DOWNLOAD_URL} ${HOME_DIR}
-# ADD ${DOWNLOAD_URL} ${HOME_DIR}
 # RUN apt update && apt install unzip -y && \
 #     unzip ${HOME_DIR}/nopCommerce_4.60.2_NoSource_linux_x64.zip && \
 #     mkdir ${HOME_DIR}/bin && mkdir ${HOME_DIR}/logs
