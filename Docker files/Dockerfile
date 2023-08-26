@@ -1,9 +1,10 @@
 FROM bitnami/dotnet-sdk:7.0.400-debian-11-r15
 ARG user=nopcommerce
+RUN useradd ${user} 
 ARG group=nopcommerce
 ARG uid=1000
 ARG gid=1000 
-USER ${user}[:<${group}>]
+USER ${user}
 ARG HOME_DIR=/somanath
 WORKDIR ${HOME_DIR}
 # ADD --chown=${user}:${group}
