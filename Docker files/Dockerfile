@@ -7,7 +7,7 @@ USER ${user}
 ARG HOME_DIR=/somanath
 WORKDIR ${HOME_DIR}
 RUN groupadd -g ${gid} ${group} &&\
-    useradd -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+    useradd -u ${uid} -g ${gid} -m /bin/bash ${user}
 # LABEL author = "shiva" director = "somanath" camera = "thiru"
 # ARG DOWNLOAD_URL=https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip
 # ADD --chown=${user}:${group} ${DOWNLOAD_URL} ${HOME_DIR}
