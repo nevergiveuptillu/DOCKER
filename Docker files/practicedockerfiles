@@ -1,17 +1,18 @@
-1) using present path
+# 1) using present path
+
 FROM amazoncorretto:11
 RUN curl https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar -o spring-petclinic-2.4.2.jar
 EXPOSE 8080
 CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
 
-2) using alpine image
+# 2) using alpine image
 FROM alpine:3.18.3
 RUN openjdk11
 RUN wget https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
 EXPOSE 8080
 CMD [ "java","-jar","spring-petclinic-2.4.2.jar" ]                 
 
-3) Label
+# 3) Label
 
 FROM amazoncorretto:12
 LABEL author="shiva"
@@ -22,7 +23,7 @@ EXPOSE 8080
 CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
 
 
-4) alpine and label
+# 4) alpine and label
 
  FROM alpine
  LABEL author = "shivasomanath"
@@ -31,7 +32,7 @@ CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
  EXPOSE 8080
  CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
 
-5) Using Add command
+# 5) Using Add command
 
  FROM amazoncorretto:11
  LABEL author = "shivs"
@@ -39,7 +40,7 @@ CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
  EXPOSE 8080
  CMD ["java","-jar","/root/spc/spring-petclinic-2.4.2.jar"]
 
-6) COPY
+# 6) COPY
 
   FROM amazoncorretto:11
   LABEL author = "shivs"
@@ -47,7 +48,8 @@ CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
   EXPOSE 8080
   CMD ["java","-jar","/root/spc/spring-petclinic-2.4.2.jar"]            
 
-  7)Nop installation (docker container exec -it --name nop /bin/bash)  
+# 7)Nop installation (docker container exec -it --name nop /bin/bash)  
+
   WORKDIR Sets the working path
          The absolute or relative path to use as the working directory. Will be created if it does not exist.
 
@@ -55,7 +57,7 @@ CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
    LABEL author = "shiva"
    LABEL director = "somanath"
    LABEL camera = "thiru"
-   ADD https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip /soman    ath/
+   ADD https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip /somanath/
    WORKDIR /somanath
    RUN apt update && apt install unzip -y && \
        unzip nopCommerce_4.60.2_NoSource_linux_x64.zip && \
@@ -64,16 +66,17 @@ CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
   CMD ["dotnet","Nop.Web.dll","--urls","http://0.0.0.0:5000"]
 
 
-8)scrrath used for hardware system write dockefile junifer 
+# 8)scrrath used for hardware system write dockefile junifer 
 
-using env varible
+# using env varible
 
-docker container exec Nop printenv
+# docker container exec Nop printenv
 
-docker image build -t nop:1.0 -f Dockerfile .
+# docker image build -t nop:1.0 -f Dockerfile .
 
-https://andrewlock.net/5-ways-to-set-the-urls-for-an-aspnetcore-app/  set env varible asp.net
-9) 
+# https://andrewlock.net/5-ways-to-set-the-urls-for-an-aspnetcore-app/  set env varible asp.net
+
+# 9) understanding folder structure
 
 FROM bitnami/dotnet-sdk:7.0.400-debian-11-r15
 LABEL author = "shiva"
@@ -87,4 +90,27 @@ RUN apt update && apt install unzip -y && \
 EXPOSE 5000
 ENV ASPNETCORE_URLS="http://0.0.0.0:5000"
 CMD ["dotnet","Nop.Web.dll"]
+
+# 10) ARG used for varible in name = value Define a variable with an optional default value that users can override at build-time when using docker build.Since Docker 1.9
+
+
+FROM bitnami/dotnet-sdk:7.0.400-debian-11-r15
+LABEL author = "shiva" director = "somanath" camera = "thiru"
+ARG DOWNLOAD_URL=https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip
+# ADD https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip /somanath/
+ARG HOME_DIR=/somanath
+# WORKDIR /somanath
+WORKDIR ${HOME_DIR}
+ADD ${DOWNLOAD_URL} ${HOME_DIR}
+RUN apt update && apt install unzip -y && \
+    unzip ${HOME_DIR}/nopCommerce_4.60.2_NoSource_linux_x64.zip && \
+    mkdir ${HOME_DIR}/bin && mkdir ${HOME_DIR}/logs
+EXPOSE 5000
+ENV ASPNETCORE_URLS="http://0.0.0.0:5000"
+CMD ["dotnet","Nop.Web.dll"]
+
+#[Refer Here](https://github.com/SHIVASOMANATH/DOCKER/commit/353767a9f81357e2e52e565f042ff9fef451b7880)
+ 
+# 11) 
+
                                                                  
