@@ -8,5 +8,6 @@ RUN apt update && apt install unzip -y && \
     unzip nopCommerce_4.60.2_NoSource_linux_x64.zip && \
      mkdir /somanath/bin && mkdir /somanath/logs
 EXPOSE 5000
-CMD ["dotnet","Nop.Web.dll","--urls","http://0.0.0.0:5000"]
+ENV ASPNETCORE_URLS = "http://localhost:5000"
+CMD ["dotnet","Nop.Web.dll","--urls"]
                                                                  
