@@ -6,6 +6,7 @@ ARG gid=1000
 USER ${user}
 ARG HOME_DIR=/somanath
 WORKDIR ${HOME_DIR}
+ADD --chown=${user}:${group}
 # RUN groupadd -g ${gid} ${group} 
     # usermod -u ${uid} -g ${gid} -m /bin/bash ${user}
 # LABEL author = "shiva" director = "somanath" camera = "thiru"
