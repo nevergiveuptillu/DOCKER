@@ -1,4 +1,4 @@
-FROM bitnami/dotnet-sdk:7.0.400-debian-11-r15
+FROM mcr.microsoft.com/dotnet/sdk:7.0
 LABEL author = "shiva" director = "somanath" camera = "thiru"
 ARG user=nopcommerce
 ARG group=nopcommerce
