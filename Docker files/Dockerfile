@@ -1,6 +1,6 @@
 FROM bitnami/dotnet-sdk:7.0.400-debian-11-r15
-ARG user=nopCommerce
-ARG group=nopCommerce
+ARG user=nopcommerce
+ARG group=nopcommerce
 ARG uid=1000
 ARG gid=1000 
 USER ${user}
