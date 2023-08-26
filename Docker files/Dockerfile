@@ -9,5 +9,5 @@ RUN apt update && apt install unzip -y && \
      mkdir /somanath/bin && mkdir /somanath/logs
 EXPOSE 5000
 ENV ASPNETCORE_URLS = "http://localhost:5000"
-CMD ["dotnet","Nop.Web.dll","--urls"]
+CMD ["dotnet","Nop.Web.dll"]
                                                                  
