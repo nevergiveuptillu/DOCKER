@@ -9,7 +9,7 @@ ARG HOME_DIR=/somanath
 ADD ${DOWNLOAD_URL} ${HOME_DIR}
 WORKDIR ${HOME_DIR}
 RUN apt update && apt install unzip -y && \
-    unzip nopCommerce_4.60.2_NoSource_linux_x64.zip && \
+    unzip ${HOME_DIR} nopCommerce_4.60.2_NoSource_linux_x64.zip && \
     mkdir ${HOME_DIR}/bin && mkdir ${HOME_DIR}/logs
 EXPOSE 5000
 ENV ASPNETCORE_URLS="http://0.0.0.0:5000"
