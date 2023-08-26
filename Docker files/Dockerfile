@@ -12,8 +12,8 @@ RUN groupadd -g ${gid} ${group} &&\
 ARG HOME_DIR=/somanath
 # WORKDIR /somanath
 WORKDIR ${HOME_DIR}
-ADD --chown=${user}:${group} ${DOWNLOAD_URL} ${HOME_DIR}
-ADD ${DOWNLOAD_URL} ${HOME_DIR}
+# ADD --chown=${user}:${group} ${DOWNLOAD_URL} ${HOME_DIR}
+# ADD ${DOWNLOAD_URL} ${HOME_DIR}
 # RUN apt update && apt install unzip -y && \
 #     unzip ${HOME_DIR}/nopCommerce_4.60.2_NoSource_linux_x64.zip && \
 #     mkdir ${HOME_DIR}/bin && mkdir ${HOME_DIR}/logs
