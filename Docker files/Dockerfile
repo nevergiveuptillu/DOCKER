@@ -1,12 +1,15 @@
 FROM bitnami/dotnet-sdk:7.0.400-debian-11-r15
-LABEL author = "shiva"
-LABEL director = "somanath"
-LABEL camera = "thiru"
-ADD https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip /somanath/
-WORKDIR /somanath
+USER nopCommerce
+LABEL author = "shiva" director = "somanath" camera = "thiru"
+ARG DOWNLOAD_URL=https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip
+# ADD https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip /somanath/
+ARG HOME_DIR=/somanath
+# WORKDIR /somanath
+WORKDIR ${HOME_DIR}
+ADD ${DOWNLOAD_URL} ${HOME_DIR}
 RUN apt update && apt install unzip -y && \
-    unzip nopCommerce_4.60.2_NoSource_linux_x64.zip && \
-    mkdir /somanath/bin && mkdir /somanath/logs
+    unzip ${HOME_DIR}/nopCommerce_4.60.2_NoSource_linux_x64.zip && \
+    mkdir ${HOME_DIR}/bin && mkdir ${HOME_DIR}/logs
 EXPOSE 5000
 ENV ASPNETCORE_URLS="http://0.0.0.0:5000"
 CMD ["dotnet","Nop.Web.dll"]

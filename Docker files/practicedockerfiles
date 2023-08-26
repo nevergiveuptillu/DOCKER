@@ -50,8 +50,7 @@ CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
 
 # 7)Nop installation (docker container exec -it --name nop /bin/bash)  
 
-  WORKDIR Sets the working path
-         The absolute or relative path to use as the working directory. Will be created if it does not exist.
+  # WORKDIR: Setsthe/working/path The absolute or relative path to use as the working directory. Will be created if it does not exist.
 
    FROM bitnami/dotnet-sdk:7.0.400-debian-11-r15
    LABEL author = "shiva"
@@ -76,7 +75,8 @@ CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
 
 # https://andrewlock.net/5-ways-to-set-the-urls-for-an-aspnetcore-app/  set env varible asp.net
 
-# 9) understanding folder structure
+# 9) understanding folder structure ENV Set the environment variable key to the value value.
+
 
 FROM bitnami/dotnet-sdk:7.0.400-debian-11-r15
 LABEL author = "shiva"
