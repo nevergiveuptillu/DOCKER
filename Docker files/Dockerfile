@@ -3,10 +3,10 @@ ARG user=nopcommerce
 ARG group=nopcommerce
 ARG uid=1000
 ARG gid=1000 
-USER ${user}
+USER ${user}[:<${group}>]
 ARG HOME_DIR=/somanath
 WORKDIR ${HOME_DIR}
-ADD --chown=${user}:${group}
+# ADD --chown=${user}:${group}
 # RUN groupadd -g ${gid} ${group} 
     # usermod -u ${uid} -g ${gid} -m /bin/bash ${user}
 # LABEL author = "shiva" director = "somanath" camera = "thiru"
