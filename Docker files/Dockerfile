@@ -6,7 +6,7 @@ ARG gid=1000
 USER ${user}
 ARG HOME_DIR=/somanath
 WORKDIR ${HOME_DIR}
-RUN groupadd -g ${gid} ${group} 
+RUN groupadd ${gid} ${group} 
     # usermod -u ${uid} -g ${gid} -m /bin/bash ${user}
 # LABEL author = "shiva" director = "somanath" camera = "thiru"
 # ARG DOWNLOAD_URL=https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.2/nopCommerce_4.60.2_NoSource_linux_x64.zip
