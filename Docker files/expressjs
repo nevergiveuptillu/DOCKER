@@ -1,15 +1,24 @@
-FROM node:latest
+FROM node:20
 LABEL author="somanath" project="mysoul" organization="sai priya"
 ARG USERNAME=express
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-RUN apk add --no-cache shadow
-RUN groupmod -g $USER_GID $USERNAME \
-    && usermod -u $USER_UID --gid $USER_GID $USERNAME \
-    && chown -R $USER_UID:$USER_GID /home/$USERNAME
-RUN apt update && apt install git -y
-RUN git clone https://github.com/Azure-Samples/js-e2e-express-server.git
-RUN cd js-e2e-express-server/ apt install npm -y && npm install
-EXPOSE 3000
-ENV TEST="default"
-CMD ["npm","start"]
+ARG USER_UID=1002
+ARG GROUP_GID=1002
+ARG GROUP_NAME=express
+RUN mkdir /something
+ARG HOME_DIR=/something
+# ARG DOWNLOAD_URL= http://github.com/Azure-Samples/js-e2e-express-server.git
+RUN apt update && apt install sudo && \
+    git clone http://github.com/Azure-Samples/js-e2e-express-server.git
+RUN mv /js-e2e-express-server ${HOME_DIR}/
+RUN adduser --home ${HOME_DIR} --shell /bin/sh --disabled-password --uid ${USER_UID} ${USERNAME} && \
+    chown ${USERNAME}:${GROUPNAME} ${HOME_DIR}
+USER ${USERNAME}
+# WORKDIR ${HOME_DIR}/js-e2e-express-server
+# RUN adduser -h ${HOME_DIR} -s /bin/bash -D -u ${USER_UID} ${USERNAME}
+# RUN cd ${HOME_DIR}/js-e2e-express-server/ &&  npm install
+# WORKDIR ${HOME_DIR}/js-e2e-express-server
+# EXPOSE 3000
+# ENV TEST="default"
+# CMD ["npm","start"]
+
+

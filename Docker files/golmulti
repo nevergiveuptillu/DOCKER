@@ -1,0 +1,21 @@
+FROM alpine/git AS vcs
+RUN cd / && \
+    git clone https://github.com/wakaleo/game-of-life.git 
+
+FROM maven:3-amazoncorretto-8 AS build
+COPY --from=vcs /game-of-life /game-of-life
+RUN cd /game-of-life && mvn package
+
+FROM tomcat:9-jdk8
+LABEL qtstudent="shiva"
+ARG user=love
+ARG group=love
+ARG uid=1000
+ARG gid=1000
+RUN adduser --home / --shell /bin/sh --disabled-password --uid ${uid} ${user} 
+USER ${user}
+COPY --chown=${user}:${group} --from=build /game-of-life/gameoflife-web/target/gameoflife /usr/local/tomcat/webapps/gameoflife.war
+VOLUME "/usr/local/tomcat"
+WORKDIR /usr/local/tomcat/webapps/
+EXPOSE 8080
+

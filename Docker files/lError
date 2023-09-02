@@ -8,12 +8,14 @@ ARG user=neymar
 ARG group=neymar
 ARG uid=1002
 ARG gid=1002
-ARG HOME_DIR=juni
+ARG HOME_DIR=/juni
+WORKDIR ${HOME_DIR}
 RUN adduser -h ${HOME_DIR} -s /bin/sh -D -u ${uid} ${user}
 USER ${user}
 COPY --chown=${user}:${group} --from=vcs /express ${HOME_DIR}/
-RUN cd ${HOME_DIR}/js-e2e-express-server/ && npm install 
+RUN cd ${HOME_DIR}/js-e2e-express-server/src/ && npm install
 EXPOSE 3000
-WORKDIR ${HOME_DIR}/js-e2e-express-server
-ENTRYPOINT ["npm"]
-CMD ["start"]
+# ENV ASPNETCORE_URLS="http://0.0.0.0:3000"
+ENTRYPOINT ["node"]
+# ENTRYPOINT [ "${HOME_DIR}/js-e2e-express-server/src/index.js" ]
+CMD ["index.js","--urls","http://0.0.0.0:3000"]

@@ -111,6 +111,33 @@ CMD ["dotnet","Nop.Web.dll"]
 
 #[Refer Here](https://github.com/SHIVASOMANATH/DOCKER/commit/353767a9f81357e2e52e565f042ff9fef451b7880)
  
-# 11) 
+# 11) Docker file for multi stage and notrrot user permission with assign volume
+
+FROM alpine/git AS vcs
+RUN mkdir spc \
+    cd /spc && \
+    git clone https://github.com/spring-projects/spring-petclinic.git /spc && \
+    pwd && ls
+FROM maven:3.9.4-amazoncorretto-17 AS builder
+COPY --from=vcs /spc /spc
+RUN ls /spc
+RUN cd /spc && mvn package
+
+
+FROM openjdk:17-alpine
+LABEL author="somaath",director="boaz"
+ARG HOME_DIR=/petclinic
+WORKDIR ${HOME_DIR}
+VOLUME ${HOME_DIR}
+ARG user=spring
+ARG group=spring
+ARG uid=1000
+ARG gid=1000
+RUN adduser -h ${HOME_DIR} -s /bin/sh -D ${user} && \
+    chown ${user}:${group} ${HOME_DIR}
+USER ${user}
+COPY --from=builder /spc/target/spring-*.jar ${HOME_DIR}/spring-*.jar
+EXPOSE 8080
+CMD ["java","-jar","spring-*.jar"]
 
                                                                  

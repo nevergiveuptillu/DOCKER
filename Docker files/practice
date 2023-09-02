@@ -15,7 +15,6 @@ USER $ {user}
 WORKDIR ${HOME_DIR}
 ADD --chown=${user}:${group} ${DOWNLOAD_URL} ${HOME_DIR}/gameoflife.war
 EXPOSE 8080
-FROM alpine
-ENTRYPOINT [ "sleep" ]
-CMD ["1d"]
-RUN 
+# FROM alpine
+# ENTRYPOINT [ "sleep" ]
+# CMD ["1d"]

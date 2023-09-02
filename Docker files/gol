@@ -1,0 +1,12 @@
+FROM tomcat:9-jdk8
+LABEL author = "somanath"
+ADD https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/gameoflife.w    ar /usr/local/tomcat/webapps/gameoflife.war
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+
+ FROM tomcat:9-jdk8
+ LABEL author = "somanath"
+ ARG GOL_URL=https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/gameoflife.war
+ ADD ${GOL_URL} /usr/local/tomcat/webapps/gameoflife.war
+ VOLUME "/usr/local/tomcat"
+ EXPOSE 8080
