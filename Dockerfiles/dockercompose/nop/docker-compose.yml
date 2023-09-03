@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: nop
     networks:
-    - nop-net
+    - nopnet
     ports:
     - "34567:5000"
     depends_on:
