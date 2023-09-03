@@ -4,7 +4,7 @@ services:
   nop:
     build:
       context: /DOCKER/Docker\ files/nop
-      dockerfile: multinop
+      dockerfile: multinop.Dockerfile
     networks:
     - nop-net
     ports:
