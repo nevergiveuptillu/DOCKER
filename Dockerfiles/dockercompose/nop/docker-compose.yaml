@@ -1,10 +1,9 @@
 version: "3.8"
-
 services:
   nop:
     build:
       context: .
-      dockerfile: multinop.Dockerfile
+      dockerfile: Dockerfile
     networks:
     - nop-net
     ports:
@@ -17,7 +16,7 @@ services:
     networks:
     - nop-net
     volumes:
-    - nop-db: /var/lib/mysql
+    - nop-db:/var/lib/mysql
     environment:
     - MYSQL_ROOT_PASSWORD=rootroot
     - MYSQL_USER=nop
@@ -27,3 +26,4 @@ services:
     nop-db:
   networks:
     nop-net:
+
