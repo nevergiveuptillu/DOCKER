@@ -1,24 +1,28 @@
-FROM node:20
+FROM node:20-alpine3.17
 LABEL author="somanath" project="mysoul" organization="sai priya"
 ARG USERNAME=express
-ARG USER_UID=1002
-ARG GROUP_GID=1002
+ARG USER_UID=1004
+ARG GROUP_GID=1004
 ARG GROUP_NAME=express
-RUN mkdir /something
 ARG HOME_DIR=/something
-# ARG DOWNLOAD_URL= http://github.com/Azure-Samples/js-e2e-express-server.git
-RUN apt update && apt install sudo && \
-    git clone http://github.com/Azure-Samples/js-e2e-express-server.git
-RUN mv /js-e2e-express-server ${HOME_DIR}/
-RUN adduser --home ${HOME_DIR} --shell /bin/sh --disabled-password --uid ${USER_UID} ${USERNAME} && \
-    chown ${USERNAME}:${GROUPNAME} ${HOME_DIR}
+RUN adduser -h ${HOME_DIR} -s /bin/sh -D -u ${USER_UID} ${USERNAME} && \
+    chown ${USERNAME}:${GROUP_NAME} ${HOME_DIR}
+COPY --chown=${USERNAME}:${GROUP_NAME} /js-e2e-express-server ${HOME_DIR}/js-e2e-express-server
 USER ${USERNAME}
+WORKDIR ${HOME_DIR}/js-e2e-express-server
+RUN npm install
+EXPOSE 3000
+CMD ["npm","start"]
+
+# RUN adduser --home ${HOME_DIR} --shell /bin/sh --disabled-password --uid ${USER_UID} ${USERNAME}
 # WORKDIR ${HOME_DIR}/js-e2e-express-server
-# RUN adduser -h ${HOME_DIR} -s /bin/bash -D -u ${USER_UID} ${USERNAME}
+
 # RUN cd ${HOME_DIR}/js-e2e-express-server/ &&  npm install
-# WORKDIR ${HOME_DIR}/js-e2e-express-server
-# EXPOSE 3000
 # ENV TEST="default"
-# CMD ["npm","start"]
+    # git clone http://github.com/Azure-Samples/js-e2e-express-server.git
+# RUN mv /js-e2e-express-server ${HOME_DIR}/
+# RUN addgroup -g ${GROUP_GID} -S ${GROUP_NAME} 
+
+
 
 
