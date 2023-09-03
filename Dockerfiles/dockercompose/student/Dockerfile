@@ -1,0 +1,25 @@
+FROM alpine/git As vcs
+RUN git clone https://github.com/DevProjectsForDevOps/StudentCoursesRestAPI.git /student
+
+FROM python:3.7-alpine
+LABEL author=somanath
+LABEL blog=somanath.blog
+ARG HOME_DIR='/studentcourses'
+ARG user=thirumala
+ARG group=thirumala
+ARG uid=1000
+ARG gid=1000
+RUN adduser -h ${HOME_DIR} -s /bin/sh -D -u  ${uid} ${user} 
+#     chown ${user}:${group} ${HOME_DIR}/StudentCoursesRestAPI
+USER ${user}
+COPY --chown=${user}:${group} --from=vcs /student ${HOME_DIR}/StudentCoursesRestAPI
+ENV MYSQL_USERNAME='directdevops'
+ENV MYSQL_PASSWORD='directdevops'
+ENV MYSQL_SERVER='localhost'
+ENV MYSQL_SERVER_PORT='3306'
+ENV MYSQL_DATABASE='test'
+WORKDIR ${HOME_DIR}/StudentCoursesRestAPI
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+EXPOSE 8080
+ENTRYPOINT ["python", "app.py"]

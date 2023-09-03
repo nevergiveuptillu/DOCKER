@@ -12,9 +12,7 @@ EXPOSE 8080
 WORKDIR ${HOME_DIR}/StudentCoursesRestAPI
 RUN  pip install --upgrade pip && \
      pip install -r requirements.txt
+EXPOSE 8080
 ENTRYPOINT ["python", "app.py"]
 
 # https://github.com/DevProjectsForDevOps/StudentCoursesRestAPI.git
-
-# 221-855-528
-#  172.17.0.3
