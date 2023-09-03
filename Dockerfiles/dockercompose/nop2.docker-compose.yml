@@ -3,7 +3,7 @@ version: "3.8"
 services:
   nop:
     build:
-      context: /DOCKER/Docker\ files/nop
+      context: /root/DOCKER/Dockerfiles/nop
       dockerfile: multinop.Dockerfile
     networks:
     - nop-net
