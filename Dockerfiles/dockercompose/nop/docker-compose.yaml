@@ -22,8 +22,7 @@ services:
     - MYSQL_USER=nop
     - MYSQL_PASSWORD=rootroot
     - MYSQL_DATABASE=nop
-  volumes:
-    nop-db:
-  networks:
-    nop-net:
-
+volumes:
+  nop-db:
+networks:
+  nop-net:
