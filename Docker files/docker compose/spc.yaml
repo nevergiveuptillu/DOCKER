@@ -12,3 +12,5 @@ services:
       - spc-net 
 networks:
   spc-net:
+
+https://github.com/dummyrepos/spring-petclinic-docker/commit/07b4df09a80ee0f020219ddfe22e82653068d23a

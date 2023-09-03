@@ -26,3 +26,5 @@ volumes:
   nop-db:
 networks:
   nop-net:
+
+https://github.com/asquarezone/DockerZone/commit/ef87b7fd376022fb488e75ff148da6999ad9e0df#diff-2c2149dd18a9a2b5352a91a45fe7a0a534934e9d9de3feed26cbc544f58e15ac
