@@ -4,25 +4,32 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: nop
     networks:
     - nop-net
     ports:
     - "34567:5000"
     depends_on:
-    - nop-db
+    - nopdb
 
-  nop-db:
+  nopdb:
     image: mysql:8
     networks:
-    - nop-net
+      - nopnet
     volumes:
-    - nop-db:/var/lib/mysql
+      - "nop-db:/var/lib/mysql"
     environment:
-    - MYSQL_ROOT_PASSWORD=rootroot
-    - MYSQL_USER=nop
-    - MYSQL_PASSWORD=rootroot
-    - MYSQL_DATABASE=nop
+      - MYSQL_ROOT_PASSWORD=rootroot
+      - MYSQL_USER=nop
+      - MYSQL_PASSWORD=rootroot
+      - MYSQL_DATABASE=nop
+    container_name: nopdb
+    ports:
+      - 3306
 volumes:
   nop-db:
 networks:
-  nop-net:
+  public:
+  private:
+  nopnet:
+
