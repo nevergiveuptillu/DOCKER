@@ -11,6 +11,9 @@ services:
       - mysqlserver
   
   mysqlserver:
+    image: mysql:8
+    volumes:
+      - "mysqlserver:/var/lib/mysql"
     environment:
       - MYSQL_USERNAME='directdevops'
       - MYSQL_PASSWORD='directdevops'
